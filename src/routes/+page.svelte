@@ -24,6 +24,7 @@
 		newTriangle.dots = dots[Math.floor(Math.random() * dots.length)];
 		newTriangle.color = colors[Math.floor(Math.random() * colors.length)];
 		newTriangle.direction = directions[Math.floor(Math.random() * directions.length)];
+		console.log(newTriangle);
 	};
 
 	triangleCreator();
@@ -66,8 +67,8 @@
 	};
 </script>
 
-<div class="flex flex-col gap-5 w-screen h-screen items-center justify-center border">
-	<div>SCORE: {score}</div>
+<div class="flex flex-col gap-5 w-screen h-screen items-center justify-center">
+	<div><span class="text-4xl">{score}</span></div>
 
 	<div class="pb-10">
 		<div>Rule 1: Same {rule1}</div>
@@ -77,10 +78,42 @@
 	<button on:click={checkRule1} class="p-2">Rule 1</button>
 
 	<div class="flex gap-5">
-		<div class="border p-5 rounded-xl">
-			<div>direction: {newTriangle.direction}</div>
-			<div>color: {newTriangle.color}</div>
-			<div>dots: {newTriangle.dots}</div>
+		<div
+			class="w-0 h-0
+      border-l-[50px] border-l-transparent
+      border-t-[75px] border-t-{newTriangle.color}-500
+      border-r-[50px] border-r-transparent
+      {newTriangle.direction === 'down' && 'rotate-0'}
+      {newTriangle.direction === 'left' && 'rotate-90'}
+      {newTriangle.direction === 'up' && 'rotate-180'}
+      {newTriangle.direction === 'right' && '-rotate-90'}"
+		>
+			{#if newTriangle.dots === 4}
+				<div class="flex flex-col absolute bottom-7 -left-1 gap-1 rotate-90">
+					<div class="w-3 h-3 rounded-full bg-white" />
+					<div class="w-3 h-3 rounded-full bg-white" />
+					<div class="w-3 h-3 rounded-full bg-white" />
+					<div class="w-3 h-3 rounded-full bg-white" />
+				</div>
+			{/if}
+			{#if newTriangle.dots === 3}
+				<div class="flex flex-col absolute bottom-7 -left-1 gap-1 rotate-90">
+					<div class="w-3 h-3 rounded-full bg-white" />
+					<div class="w-3 h-3 rounded-full bg-white" />
+					<div class="w-3 h-3 rounded-full bg-white" />
+				</div>
+			{/if}
+			{#if newTriangle.dots === 2}
+				<div class="flex flex-col absolute bottom-7 -left-1 gap-1 rotate-90">
+					<div class="w-3 h-3 rounded-full bg-white" />
+					<div class="w-3 h-3 rounded-full bg-white" />
+				</div>
+			{/if}
+			{#if newTriangle.dots === 1}
+				<div class="flex flex-col absolute bottom-7 -left-1 rotate-90">
+					<div class="w-3 h-3 rounded-full bg-white" />
+				</div>
+			{/if}
 		</div>
 
 		<button on:click={checkNoMatch} class="p-2">No match</button>
