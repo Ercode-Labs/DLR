@@ -71,17 +71,21 @@
 	<div><span class="text-4xl">{score}</span></div>
 
 	<div class="pb-10">
-		<div>Rule 1: Same {rule1}</div>
-		<div>Rule 2: Same {rule2}</div>
+		<div>Press top button if following triangle has the same {rule1}.</div>
+		<div>Press bottom button if following triangle has the same {rule2}.</div>
+		<div>If none of them is the same, press right.</div>
 	</div>
 
-	<button on:click={checkRule1} class="p-2">Rule 1</button>
+	<button on:click={checkRule1} class="m-5 h-10 w-10 border rounded hover:bg-gray-500" />
 
 	<div class="flex gap-5">
 		<div
 			class="w-0 h-0
-      border-l-[50px] border-l-transparent
-      border-t-[75px] border-t-{newTriangle.color}-500
+      border-l-[50px] border-l-transparent border-t-[75px]
+      {newTriangle.color === 'red' && 'border-t-red-500'}
+      {newTriangle.color === 'yellow' && 'border-t-yellow-500'}
+      {newTriangle.color === 'blue' && 'border-t-blue-500'}
+      {newTriangle.color === 'green' && 'border-t-green-500'}
       border-r-[50px] border-r-transparent
       {newTriangle.direction === 'down' && 'rotate-0'}
       {newTriangle.direction === 'left' && 'rotate-90'}
@@ -116,8 +120,8 @@
 			{/if}
 		</div>
 
-		<button on:click={checkNoMatch} class="p-2">No match</button>
+		<button on:click={checkNoMatch} class="m-5 h-10 w-10 border rounded hover:bg-gray-500" />
 	</div>
 
-	<button on:click={checkRule2} class="p-2">Rule 2</button>
+	<button on:click={checkRule2} class="m-5 h-10 w-10 border rounded hover:bg-gray-500" />
 </div>
